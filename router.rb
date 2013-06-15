@@ -1,16 +1,17 @@
+require_relative 'html_generator'
 class Router
 
-
   initialize(main,extra)
-    @html = Html_generator.new(main,extra)
+    @page = HtmlGenerator.new(main,extra)
     case main
-    when 'index' then @html.index
-    when 'show' then extra!= nil @html.show : "Wrong id #{extra}"
+    when 'index' then @page.index
+    when 'show' then extra!= nil @page.show : "Wrong id #{extra}"
     else "No action #{main}"
     end
   end
 
-
 end
-
-Router.new(ARGV[0], ARGV[1])
+def no_arguments
+  puts "No arguments.\nNext time time ruby router.rb command(index/show) extra_info(id/product name) > name_of_file(not nescesary)" 
+end
+ARGV.empty? ? no_arguments : Router.new(ARGV[0], ARGV[1])
