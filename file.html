@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Filip's Page</title>
+    <link rel='stylesheet' href='normalize.css' type='text/css'>
+    <link rel='stylesheet' href='styles.css' type='text/css'>
+  </head>
+  <body>
+<h1>Products:</h1>
+Array
+[0G
+[1mFrom:[0m /Users/Bitmaker/Documents/Connoisseur/html_generator.rb @ line 68 HtmlGenerator#retrive_data:
+
+    [1;34m59[0m: 	[1;31mdef[0m [1;34mretrive_data[0m(url)
+    [1;34m60[0m: 		[0;34m# Retrieve JSON-formatted text from lcboapi.com[0m
+    [1;34m61[0m:    		raw_response = open(url).read
+    [1;34m62[0m:     	[0;34m# Parse JSON-formatted text into a Ruby Hash[0m
+    [1;34m63[0m:     	parsed_response = [1;34m[4mJSON[0m.parse(raw_response)
+    [1;34m64[0m: 
+    [1;34m65[0m:     	[0;34m# Return just the actual result data from the response, ignoring metadata[0m
+    [1;34m66[0m:     	result = parsed_response[[32m[1;32m"[0m[32mresult[1;32m"[0m[32m[0m]
+    [1;34m67[0m:     	puts result.class
+ => [1;34m68[0m:     	binding.pry
+    [1;34m69[0m: 	[1;31mend[0m
+

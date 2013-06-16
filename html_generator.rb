@@ -1,17 +1,14 @@
+require 'open-uri'
+require 'JSON'
+require 'pry'
 class HtmlGenerator
 
-	attr_reader :main, :extra
+	def index(search)
 
-	def initialize(main,extra)
-		@main = main
-		@extra = extra
-
-	end
-
-	def index
 		print_header
 		puts "<h1>Products:</h1>"
-		retrive_data("http://lcboapi.com/products?q=#{extra}").each do |product|
+		products = retrive_data("http://lcboapi.com/products?q=#{search}")
+		products.each do |product|
 	   		puts "<div class='product'>"
 		    puts "  <h2>#{product['name']}</h2>"
 		    puts "  <img src='#{product['image_thumb_url']}'  class='product-thumbnail'/>"
@@ -24,11 +21,12 @@ class HtmlGenerator
 		    puts "    <li>$#{format_price(product['price_in_cents'])}</li>"
 		    puts "  </ul>"
 		    puts "</div>"
-		print_header
+		end
+		print_footer
 	end
 
-	def show
-		retrive_data("http://lcboapi.com/products/##{extra}")
+	def show(id)
+		product = retrive_data("http://lcboapi.com/products/##{id}")
 	    print_header
 	    puts "<div class='product'>"
 	    puts "  <h2>#{product['name']}</h2>"
@@ -55,7 +53,6 @@ class HtmlGenerator
 	def retrive_data(url)
 		# Retrieve JSON-formatted text from lcboapi.com
    		raw_response = open(url).read
-
     	# Parse JSON-formatted text into a Ruby Hash
     	parsed_response = JSON.parse(raw_response)
 
@@ -77,5 +74,9 @@ class HtmlGenerator
     	puts "  </body>"
 	    puts "</html>"
 	end
+
+	def format_price(cents_string)
+    cents_string.to_f/100
+  	end
 
 end
